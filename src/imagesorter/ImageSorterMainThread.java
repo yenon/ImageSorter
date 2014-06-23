@@ -37,6 +37,7 @@ public class ImageSorterMainThread extends Thread {
 
     @Override
     public void run() {
+        ismv.setStartAviable(false);
         File[] picIn;
         File pic, fout;
         int i = 0, pcount, ipcount;
@@ -81,5 +82,6 @@ public class ImageSorterMainThread extends Thread {
         }
         ismv.setFileTextLabel("Alle Dateien kopiert!");
         ismv.setFullProgressText("Vorgang abgeschlossen!");
+        ismv.setStartAviable(true);
     }
 }

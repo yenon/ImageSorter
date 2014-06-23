@@ -178,6 +178,9 @@ public class ImageSorterMainView extends javax.swing.JFrame {
     public void setFileTextLabel(String t){
         FileDescLabel.setText(t);
     }
+    public void setStartAviable(boolean val){
+        StartButton.setEnabled(val);
+    }
     
     private void SetInputDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetInputDirActionPerformed
         jFileChooser1.showOpenDialog(null);
