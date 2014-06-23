@@ -15,13 +15,12 @@ import java.util.Calendar;
  * @author Game
  */
 public class ImageSorterMainThread extends Thread {
-    
+
     private File in;
     private String out;
     private boolean copy;
-    private final String[] extensions = {".jpg", ".png", ".jpeg"};
     private final ImageSorterMainView ismv;
-    
+
     public ImageSorterMainThread(ImageSorterMainView _ismv, String inpDir, String outpDir, boolean _copy) throws FileNotFoundException {
         ismv = _ismv;
         in = new File(inpDir);
@@ -31,27 +30,21 @@ public class ImageSorterMainThread extends Thread {
             throw new FileNotFoundException();
         }
     }
-    
+
     public void setFileProgress(int p) {
         ismv.setFileProgress(p);
     }
-    
+
     @Override
     public void run() {
-        File[] picIn, picOut;
+        File[] picIn;
         File pic, fout;
-        ArrayList pl = new ArrayList(), cl = new ArrayList();
-        int i = 0, ecount, pcount, ipcount;
+        int i = 0, pcount, ipcount;
         pcount = 0;
         boolean isPic;
         picIn = in.listFiles();
         while (i < picIn.length) {
-            isPic = false;
-            ecount = 0;
-            while (!isPic && ecount < extensions.length) {
-                isPic = picIn[i].getName().toLowerCase().endsWith(extensions[ecount]);
-                ecount++;
-            }
+            isPic = picIn[i].isFile();
             if (isPic) {
                 pcount++;
             }
@@ -62,11 +55,7 @@ public class ImageSorterMainThread extends Thread {
         ipcount = 0;
         while (i < picIn.length) {
             isPic = false;
-            ecount = 0;
-            while (!isPic && ecount < extensions.length) {
-                isPic = picIn[i].getName().toLowerCase().endsWith(extensions[ecount]);
-                ecount++;
-            }
+            isPic = picIn[i].isFile();
             if (isPic) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(picIn[i].lastModified());
