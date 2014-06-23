@@ -71,10 +71,10 @@ public class ImageSorterMainView extends javax.swing.JFrame {
 
         buttonGroup1.add(RadioBtnCopy);
         RadioBtnCopy.setSelected(true);
-        RadioBtnCopy.setText("Copy");
+        RadioBtnCopy.setText("Kopieren");
 
         buttonGroup1.add(RadioBtnMove);
-        RadioBtnMove.setText("Move");
+        RadioBtnMove.setText("Verschieben");
 
         javax.swing.GroupLayout RadioBtnPanelLayout = new javax.swing.GroupLayout(RadioBtnPanel);
         RadioBtnPanel.setLayout(RadioBtnPanelLayout);
@@ -134,7 +134,7 @@ public class ImageSorterMainView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RadioBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(StartButton, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)))
+                        .addComponent(StartButton, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

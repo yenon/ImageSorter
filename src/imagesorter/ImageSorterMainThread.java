@@ -21,9 +21,9 @@ public class ImageSorterMainThread extends Thread {
     private boolean copy;
     private final String[] extensions = {".jpg", ".png", ".jpeg"};
     private final ImageSorterMainView ismv;
-
+    
     public ImageSorterMainThread(ImageSorterMainView _ismv, String inpDir, String outpDir, boolean _copy) throws FileNotFoundException {
-        ismv=_ismv;
+        ismv = _ismv;
         in = new File(inpDir);
         out = outpDir;
         copy = _copy;
@@ -32,23 +32,22 @@ public class ImageSorterMainThread extends Thread {
         }
     }
     
-    public void setFileProgress(int p){
+    public void setFileProgress(int p) {
         ismv.setFileProgress(p);
     }
-    
     
     @Override
     public void run() {
         File[] picIn, picOut;
-        File pic,fout;
+        File pic, fout;
         ArrayList pl = new ArrayList(), cl = new ArrayList();
-        int i = 0, ecount,pcount,ipcount;
-        pcount=0;
+        int i = 0, ecount, pcount, ipcount;
+        pcount = 0;
         boolean isPic;
         picIn = in.listFiles();
         while (i < picIn.length) {
             isPic = false;
-            ecount=0;
+            ecount = 0;
             while (!isPic && ecount < extensions.length) {
                 isPic = picIn[i].getName().toLowerCase().endsWith(extensions[ecount]);
                 ecount++;
@@ -59,8 +58,8 @@ public class ImageSorterMainThread extends Thread {
             i++;
         }
         pcount--;
-        i=0;
-        ipcount=0;
+        i = 0;
+        ipcount = 0;
         while (i < picIn.length) {
             isPic = false;
             ecount = 0;
@@ -72,15 +71,15 @@ public class ImageSorterMainThread extends Thread {
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(picIn[i].lastModified());
                 pic = picIn[i];
-                if (!new File(out + "/" + String.valueOf(cal.get(Calendar.YEAR)) + "/" + String.valueOf(cal.get(Calendar.MONTH)+1) + "/" + String.valueOf(cal.get(Calendar.DATE))).isDirectory()) {
-                    if (!new File(out + "/" + String.valueOf(cal.get(Calendar.YEAR)) + "/" + String.valueOf(cal.get(Calendar.MONTH)+1) + "/" + String.valueOf(cal.get(Calendar.DATE))).mkdirs()) {
+                if (!new File(out + "/" + String.valueOf(cal.get(Calendar.YEAR)) + "/" + String.valueOf(cal.get(Calendar.MONTH) + 1) + "/" + String.valueOf(cal.get(Calendar.DATE))).isDirectory()) {
+                    if (!new File(out + "/" + String.valueOf(cal.get(Calendar.YEAR)) + "/" + String.valueOf(cal.get(Calendar.MONTH) + 1) + "/" + String.valueOf(cal.get(Calendar.DATE))).mkdirs()) {
                         System.out.println("Error!");
                     }
                 }
-                fout = new File(out + "/" + String.valueOf(cal.get(Calendar.YEAR)) + "/" + String.valueOf(cal.get(Calendar.MONTH)+1) + "/" + String.valueOf(cal.get(Calendar.DATE) + "/" + pic.getName()));
-                ismv.setFullProgress(Math.round(((float)ipcount/(float)pcount)*100));
-                ismv.setFileTextLabel("Kopiere "+pic.getName());
-                ismv.setFullProgressText("Gesamt: ("+String.valueOf(ipcount)+"/"+String.valueOf(pcount)+")");
+                fout = new File(out + "/" + String.valueOf(cal.get(Calendar.YEAR)) + "/" + String.valueOf(cal.get(Calendar.MONTH) + 1) + "/" + String.valueOf(cal.get(Calendar.DATE) + "/" + pic.getName()));
+                ismv.setFullProgress(Math.round(((float) ipcount / (float) pcount) * 100));
+                ismv.setFileTextLabel("Kopiere " + pic.getName());
+                ismv.setFullProgressText("Gesamt: (" + String.valueOf(ipcount) + "/" + String.valueOf(pcount) + ")");
                 if (copy) {
                     CopyPic cp = new CopyPic(this, pic, fout);
                     cp.copy();
@@ -91,7 +90,7 @@ public class ImageSorterMainThread extends Thread {
             }
             i++;
         }
-ismv.setFileTextLabel("Alle Dateien kopiert!");
-ismv.setFullProgressText("Vorgang abgeschlossen!");
+        ismv.setFileTextLabel("Alle Dateien kopiert!");
+        ismv.setFullProgressText("Vorgang abgeschlossen!");
     }
 }
